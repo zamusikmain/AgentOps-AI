@@ -1,0 +1,12 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {api,type Page} from '@/lib/types';
+import {translate} from '@/lib/i18n';
+export type ToolCall={id:string;tool_id:string;status:string;access:string;arguments:Record<string,unknown>;result:Record<string,unknown>|null;error:string|null;duration_ms:number|null;decision:string|null;created_at:string;stage_id:string|null};
+export function ToolHistory({runId,kind,locale}:{runId:string;kind:'single'|'workflow';locale:'ru'|'en'}){
+ const [calls,setCalls]=useState<ToolCall[]>([]);const [error,setError]=useState('');const [busy,setBusy]=useState(false);
+ const t=(key:string)=>translate(locale,key);
+ useEffect(()=>{let alive=true;async function load(){try{const p=await api<Page<ToolCall>>(`tool-calls?run_kind=${kind}&run_id=${runId}`);if(alive){setCalls(p.items);setError('');}}catch(e){if(alive)setError((e as Error).message);}}void load();const timer=setInterval(()=>void load(),1000);return()=>{alive=false;clearInterval(timer);};},[runId,kind]);
+ async function decide(id:string,decision:string){setBusy(true);try{await api(`tool-calls/${id}/decision`,'POST',{decision});setCalls((await api<Page<ToolCall>>(`tool-calls?run_kind=${kind}&run_id=${runId}`)).items);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+ return <section className="tool-history"><h3>{t('toolCalls')}</h3>{error&&<p className="error" role="alert">{t(error)}</p>}{!calls.length&&<p>{t('toolNoCalls')}</p>}{calls.map(c=><article className="stage-detail" key={c.id}><div className="dialog-heading"><strong>{t(c.tool_id)}</strong><span className={`badge ${c.status}`}>{t(c.status)}</span></div><small>{t(c.access==='write'?'write':'readOnly')} · {t('duration')}: {c.duration_ms===null?t('unknown'):`${c.duration_ms} ms`}</small>{c.decision&&<p>{t('decision')}: {t(c.decision)}</p>}<h3>{t('toolArguments')}</h3><pre className="result">{JSON.stringify(c.arguments,null,2)}</pre>{c.status==='awaiting_approval'&&<><p className="notice">{t('approvalNotice')}</p><div className="dialog-actions"><button className="secondary" disabled={busy} onClick={()=>void decide(c.id,'reject')}>{t('rejectAction')}</button><button className="primary" disabled={busy} onClick={()=>void decide(c.id,'approve')}>{t('approveAction')}</button></div></>}{c.error&&<p className="error">{t(c.error)}</p>}{c.result&&<><h3>{t('toolResult')}</h3><pre className="result">{JSON.stringify(c.result,null,2)}</pre></>}</article>)}</section>;
+}

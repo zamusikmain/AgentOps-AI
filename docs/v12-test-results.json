@@ -1,0 +1,91 @@
+{
+  "version": "1.2.0",
+  "backend_full_suite": {
+    "passed": 326,
+    "duration_seconds": 993.9
+  },
+  "post_score_regression": {
+    "passed": 2,
+    "new_unique_tests": 1,
+    "overlaps_full_suite": 1
+  },
+  "backend_unique_tests_verified": 327,
+  "targeted_sdk_budget_embedding_regression": 99,
+  "frontend_tests": 15,
+  "playwright_tests": 18,
+  "typescript": "PASS",
+  "production_build": "PASS",
+  "mock_benchmarks": {
+    "v1": 39,
+    "v2": 63,
+    "holdout": 12
+  },
+  "gold_unchanged": true,
+  "schema_head": "009",
+  "new_migration_required": false,
+  "migration_checks": {
+    "clean_database": "PASS",
+    "upgrade_009_to_head": "PASS",
+    "existing_configuration_preserved": true,
+    "schema_head": "009",
+    "new_tables_required": false,
+    "destructive_migration": false
+  },
+  "preservation": {
+    "all_primary_rows_unchanged": true,
+    "env_unchanged": true,
+    "schema_head": "009",
+    "migration_required": false,
+    "backup_excluded": true
+  },
+  "native_health": {
+    "version": "1.2.0",
+    "native_backend": "PASS",
+    "native_ui_route": "PASS",
+    "unauthenticated_proxy_status": 401,
+    "existing_bearer_api": "PASS",
+    "external_generation_enabled": false,
+    "external_embedding_enabled": false,
+    "real_validation_enabled": false,
+    "workspace_live_enabled": false,
+    "google_calls": 0,
+    "live_verification": "UNVERIFIED"
+  },
+  "synthetic_mock_quality": {
+    "passed": 5,
+    "total": 10,
+    "failed_reference_cases": [
+      "ru-exact",
+      "ru-paraphrase",
+      "en-exact",
+      "en-paraphrase",
+      "en-access"
+    ],
+    "literal_scoped_citations_valid": true
+  },
+  "dry_run": {
+    "status": "LIVE BLOCKED",
+    "plan": {
+      "index_embedding_calls_upper": 5,
+      "query_embedding_calls_upper": 30,
+      "generation_calls_upper": 10,
+      "total_calls_upper": 45,
+      "max_output_tokens_per_call": 512,
+      "max_total_tokens": 150000,
+      "estimated_cost_usd_upper": 0.375,
+      "retries": 0,
+      "fallback_calls": 0
+    },
+    "blockers": [
+      "google_index_not_built",
+      "live_execution_disabled",
+      "live_user_approval_required",
+      "missing_api_key"
+    ]
+  },
+  "live_readiness": "BLOCKED / UNVERIFIED",
+  "real_generation_requests": 0,
+  "real_embedding_requests": 0,
+  "actual_google_cost_usd": null,
+  "publication": "Separate Git/index/remote verification follows these local checks."
+}

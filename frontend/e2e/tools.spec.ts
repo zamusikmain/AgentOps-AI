@@ -1,0 +1,45 @@
+import {test,expect} from './authenticated-test';
+const origin={Origin:'http://127.0.0.1:3011'};
+test('real tools through Mock LLM, local MCP, approve/reject and history after reload',async({page,request})=>{
+ async function run(name:string,args:Record<string,unknown>,title:string){
+  const a=await request.post('/api/agents',{headers:origin,data:{name:title,role:'executor',instructions:'Use the permitted tool.',model:'gemini-3.5-flash-lite',tools:[name],max_steps:4,max_tokens:2048}});expect(a.status()).toBe(201);
+  const ta=await request.post('/api/tasks',{headers:origin,data:{title,prompt:`[MOCK_TOOL:${name}] ${JSON.stringify(args)}`,agent_id:(await a.json()).id}});expect(ta.status()).toBe(201);
+  const r=await request.post(`/api/tasks/${(await ta.json()).id}/run`,{headers:origin});expect(r.status()).toBe(202);return (await r.json()).id as string;
+ }
+ await page.goto('/');await page.getByRole('button',{name:'Инструменты',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'MCP-серверы'})).toBeVisible();
+ const discovery=page.waitForResponse(r=>r.url().endsWith('/api/mcp-servers/local-readonly/discover')&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Обнаружить инструменты'}).click();
+ expect((await discovery).ok()).toBe(true);
+ await expect(page.getByText('stdio · 2025-11-25')).toBeVisible();
+ const calc=await run('calculator',{expression:'(10+2)/3'},'v03 calculator');
+ await expect.poll(async()=> (await (await request.get(`/api/executions/${calc}`)).json()).status).toBe('completed');
+ await page.getByRole('button',{name:'Запуски',exact:true}).click();
+ await page.getByRole('button').filter({hasText:'v03 calculator'}).click();
+ const dialog=page.getByRole('dialog');
+ await expect(dialog.locator('.tool-history pre').last()).toContainText('"value": 4');
+ await page.getByRole('button',{name:'Закрыть',exact:true}).click();await page.reload();
+ await page.getByRole('button',{name:'Запуски',exact:true}).click();await page.getByRole('button').filter({hasText:'v03 calculator'}).click();
+ await expect(dialog.locator('.tool-history pre').last()).toContainText('"value": 4');await page.getByRole('button',{name:'Закрыть',exact:true}).click();
+ const mcp=await run('mcp_knowledge_search',{query:'RBAC'},'v03 MCP');
+ await expect.poll(async()=> (await (await request.get(`/api/executions/${mcp}`)).json()).status).toBe('completed');
+ const approve=await run('save_note',{text:'UI approved note'},'v03 approve');
+ await page.getByRole('button',{name:/^Агенты/}).click();await page.getByRole('button',{name:'Запуски',exact:true}).click();
+ await page.getByRole('button').filter({hasText:'v03 approve'}).click();
+ await expect(dialog.getByRole('button',{name:'Подтвердить действие'})).toBeVisible();
+ await expect(dialog.locator('.tool-history')).toContainText('UI approved note');
+ await dialog.getByRole('button',{name:'Подтвердить действие'}).click();
+ await expect(dialog.locator('.tool-history')).toContainText('"saved": true');
+ await page.screenshot({path:'test-results/tools-approved-ru.png'});await page.getByRole('button',{name:'Закрыть',exact:true}).click();
+ const reject=await run('save_note',{text:'Do not save'},'v03 reject');
+ await page.getByRole('button',{name:/^Агенты/}).click();await page.getByRole('button',{name:'Запуски',exact:true}).click();
+ await page.getByRole('button').filter({hasText:'v03 reject'}).click();
+ await dialog.getByRole('button',{name:'Отклонить действие'}).click();
+ await expect.poll(async()=> (await (await request.get(`/api/executions/${reject}`)).json()).error).toBe('tool_rejected');
+ await page.getByRole('button',{name:'Закрыть',exact:true}).click();await page.getByRole('button',{name:'Переключить язык'}).click();
+ await page.getByRole('button').filter({hasText:'v03 approve'}).click();
+ await expect(dialog.getByRole('heading',{name:'Tool calls and approvals'})).toBeVisible();
+ await expect(dialog.locator('.tool-history')).toContainText('"saved": true');
+ await page.screenshot({path:'test-results/tools-approved-en.png'});
+ expect((await (await request.get(`/api/tool-calls?run_kind=single&run_id=${approve}`)).json()).items[0].decision).toBe('approve');
+});

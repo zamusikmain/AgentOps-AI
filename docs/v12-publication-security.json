@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "staged": false,
+  "files": 304,
+  "browser_assets": 13,
+  "failures": [],
+  "secret_values_printed": false,
+  "gitleaks": "not installed; known-local-secret and credential-pattern scan used"
+}

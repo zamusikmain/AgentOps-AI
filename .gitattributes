@@ -1,0 +1,4 @@
+* text=auto eol=lf
+# Corpus integrity is byte-based; do not normalize immutable test fixtures.
+docs/fixtures/** -text -eol -whitespace
+*.pdf binary

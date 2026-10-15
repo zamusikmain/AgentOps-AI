@@ -1,0 +1,13 @@
+{
+  "version": "1.2.0",
+  "native_backend": "PASS",
+  "native_ui_route": "PASS",
+  "unauthenticated_proxy_status": 401,
+  "existing_bearer_api": "PASS",
+  "external_generation_enabled": false,
+  "external_embedding_enabled": false,
+  "real_validation_enabled": false,
+  "workspace_live_enabled": false,
+  "google_calls": 0,
+  "live_verification": "UNVERIFIED"
+}

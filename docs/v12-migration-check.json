@@ -1,0 +1,8 @@
+{
+  "clean_database": "PASS",
+  "upgrade_009_to_head": "PASS",
+  "existing_configuration_preserved": true,
+  "schema_head": "009",
+  "new_tables_required": false,
+  "destructive_migration": false
+}

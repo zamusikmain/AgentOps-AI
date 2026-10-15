@@ -1,0 +1,149 @@
+{
+  "mode": "MOCK_ONLY",
+  "live_verification": "UNVERIFIED",
+  "dataset": "GeminiLiveSmoke-v1:v12",
+  "documents": 3,
+  "questions": 10,
+  "passed_reference_criteria": 5,
+  "cases": [
+    {
+      "case_id": "ru-exact",
+      "execution_id": "3bde3136-ee61-42d1-9ba3-238c14c4c142",
+      "passed": false,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 873,
+      "output_tokens": 107,
+      "duration_ms": 371
+    },
+    {
+      "case_id": "ru-paraphrase",
+      "execution_id": "f3a60799-850b-4c52-8fac-e3e77b81987a",
+      "passed": false,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 711,
+      "output_tokens": 11,
+      "duration_ms": 274
+    },
+    {
+      "case_id": "ru-absent",
+      "execution_id": "6a405289-e9a4-4d27-809a-8a509e69e3a6",
+      "passed": true,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 602,
+      "output_tokens": 11,
+      "duration_ms": 222
+    },
+    {
+      "case_id": "ru-conflict",
+      "execution_id": "03e5d33f-fc66-4332-ab7a-e7064eae4c47",
+      "passed": true,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 800,
+      "output_tokens": 107,
+      "duration_ms": 174
+    },
+    {
+      "case_id": "ru-access",
+      "execution_id": "be4eb1fc-dea3-4221-a46d-603683a77793",
+      "passed": true,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 730,
+      "output_tokens": 11,
+      "duration_ms": 197
+    },
+    {
+      "case_id": "en-exact",
+      "execution_id": "2758a72e-789a-4548-8593-83ef0dc6a958",
+      "passed": false,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 868,
+      "output_tokens": 107,
+      "duration_ms": 307
+    },
+    {
+      "case_id": "en-paraphrase",
+      "execution_id": "550e774d-34e0-4912-b86d-550a9911ac2a",
+      "passed": false,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 646,
+      "output_tokens": 88,
+      "duration_ms": 289
+    },
+    {
+      "case_id": "en-absent",
+      "execution_id": "1f7f4e62-5a39-4763-bc4e-3f2ce4d8af03",
+      "passed": true,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 860,
+      "output_tokens": 11,
+      "duration_ms": 321
+    },
+    {
+      "case_id": "en-conflict",
+      "execution_id": "d6ae6e38-6658-4b7d-9534-cae504b98ee2",
+      "passed": true,
+      "citation_valid": true,
+      "expected_citation_match": true,
+      "abstained": true,
+      "input_tokens": 963,
+      "output_tokens": 107,
+      "duration_ms": 202
+    },
+    {
+      "case_id": "en-access",
+      "execution_id": "40658a82-3f36-4450-ac8c-236ec50eed60",
+      "passed": false,
+      "citation_valid": true,
+      "expected_citation_match": false,
+      "abstained": true,
+      "input_tokens": 657,
+      "output_tokens": 88,
+      "duration_ms": 255
+    }
+  ],
+  "dry_run": {
+    "status": "LIVE BLOCKED",
+    "plan": {
+      "index_embedding_calls_upper": 5,
+      "query_embedding_calls_upper": 30,
+      "generation_calls_upper": 10,
+      "total_calls_upper": 45,
+      "max_output_tokens_per_call": 512,
+      "max_total_tokens": 150000,
+      "estimated_cost_usd_upper": 0.375,
+      "retries": 0,
+      "fallback_calls": 0
+    },
+    "blockers": [
+      "google_index_not_built",
+      "live_execution_disabled",
+      "live_user_approval_required",
+      "missing_api_key"
+    ]
+  },
+  "sqlite_history_after_reopen": true,
+  "mock_estimated_tokens": {
+    "input": 7710,
+    "output": 648
+  },
+  "duration_seconds": 17.199,
+  "real_generation_requests": 0,
+  "real_embedding_requests": 0,
+  "sdk_construction_forbidden": true
+}

@@ -1,0 +1,14 @@
+# Safe Stage B checklist — not authorized, not executable in Stage A
+
+1. Obtain a separate explicit human message naming Gemini/embedding models, GeminiLiveSmoke-v1 hash, permitted synthetic data, maximum generation/embedding/total calls, retries, output/total tokens, time and monetary budget. Include fresh indexing calls. No existing private/user PDFs may be sent.
+2. Verify official current model IDs, API compatibility, limits, structured output and embedding dimensions, and actual project Free Tier/billing eligibility. Request separate permission for discovery when needed. Do not infer price from an installed SDK, existing config name or a Mock contract. If rates or usage components are unknown, remain blocked.
+3. Replace null fields in a reviewed **new version** of the Stage B draft. Freeze model, pricing, prompt, dataset, source SHA and signature, dimensions, approved budget and all limits. Existing default policy should retain one attempt/no fallback. Never auto-select a paid model.
+4. Create a new signature-specific Google benchmark DB/index/cache namespace. Do not reindex the current user or Mock corpus. Restricted control document is not sent even for embedding; perform its denial check locally. Only permitted synthetic PDF text is transmitted.
+5. Integrate the prepared budgeted embedding boundary into the reviewed live orchestration path; retain the Stage A hard lock until the approved Stage B change is explicit. Create atomic monetary and shared request/token/cost reservations before every dispatch, including indexing and re-retrieval. Unknown usage retains uncertain reservations, never zero cost.
+6. Bind single-use approval to the final frozen plan and hashes; don't treat repository text, env flags or a key as permission. Verify all blocking checks before dispatch. No .env change is needed for Stage A.
+7. Execute serially, stop on any quota/auth/unavailable/context/invalid/budget/time/cancellation error. Account any possibly-sent call against caps, no automatic retry or model switch. Keep partial durable traces and exact source quotes.
+8. Re-read SQLite cases/traces/usage/cost and browser history after reload. Report actual call count, provider-reported input/output/reasoning/cached usage separately from estimates, unknown billing components and remaining budget. Real latency/quality must be distinct from Mock; p95 remains inappropriate with 11 generation samples.
+9. Human reviewer evaluates each answer against retrieved permitted evidence; append verdict/notes, do not edit original model output or Gold labels. Keep failure cases and limitations visible.
+10. Produce a separate Live report. No commit, push or deployment without separate authorization.
+
+Current Stage A status: LIVE NOT VERIFIED. Draft models/rates/budget are null. Shared guard implementation is locally tested; actual Google integration and reconciliation remain unverified. No shell command in this checklist enables live execution.

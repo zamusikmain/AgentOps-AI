@@ -1,0 +1,31 @@
+{
+  "stage": "B",
+  "enabled": false,
+  "requires_explicit_user_message": true,
+  "dataset": "GeminiLiveSmoke-v1",
+  "dataset_version": 1,
+  "corpus_sha256": "4654f85c0bd1ec189e26baddbf5c86b0ea39e67841a73b8dae298572aca1abce",
+  "providers": [
+    "gemini",
+    "google"
+  ],
+  "generation_model": null,
+  "embedding_model": null,
+  "pricing": null,
+  "budget_usd": null,
+  "maximum_total_requests": 52,
+  "maximum_generation_calls": 12,
+  "maximum_embedding_calls": 41,
+  "planned_generation_calls": 11,
+  "maximum_retries": 0,
+  "fallback": false,
+  "maximum_output_tokens": 512,
+  "maximum_total_token_reservations": 150000,
+  "maximum_duration_seconds": 120,
+  "operations": [
+    "generation",
+    "embedding"
+  ],
+  "real_metrics": "NOT VERIFIED",
+  "documents": "Only permitted synthetic Northstar PDFs; restricted control document is never sent."
+}

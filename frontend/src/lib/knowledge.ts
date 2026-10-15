@@ -1,0 +1,5 @@
+export type KnowledgeDocument={id:string;name:string;sha256:string;status:string;error:string|null;pages:number;chunks:number;bytes:number;created_at:string;embedding_status:string;embedding_error:string|null;embedded_chunks:number;embedding_signature:string|null};
+export type Retrieval={mode:string;mock_embeddings:boolean;embedding_model:string;warning:string|null;matches:{chunk_id:string;document_id:string;document:string;page:number;excerpt:string;rank:number;lexical_score:number;semantic_score:number;fusion_score:number|null;rerank_score:number;reasons:string[]}[]};
+export type Chunk={id:string;document_id:string;page:number;ordinal:number;text:string};
+export type RagAnswer={mode:'extractive-rag';provider:string;mock:boolean;question:string;found:boolean;answer:string;verification?:{verified:boolean;status:string;safe_answer:string;reason:string|null};citations:{chunk_id:string;document_id:string;document:string;page:number;quote:string}[]};
+export function parseRag(result:string|null):RagAnswer|null{try{const data=JSON.parse(result||'');return data.mode==='extractive-rag'?data:null;}catch{return null;}}

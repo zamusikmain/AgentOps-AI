@@ -1,0 +1,170 @@
+[
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "scripts/e2e-backend.py:17 (<module>)",
+    "environment": "env-1"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "scripts/rag-diagnose.py:11 (<module>)",
+    "environment": "env-2"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "scripts/v03-tool-example.py:11 (<module>)",
+    "environment": "env-3"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "scripts/workflow-mock-example.py:19 (<module>)",
+    "environment": "env-4"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/app/live_smoke.py:56 (_runtime)",
+    "environment": "env-5"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_api.py:18 (settings)",
+    "environment": "env-6"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_api.py:159 (test_missing_key)",
+    "environment": "env-7"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_api.py:189 (test_gemini_sdk_contract)",
+    "environment": "env-8"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_evidence_v07.py:31 (test_mock_rag_never_uses_external_embeddings_before_permission_check)",
+    "environment": "env-9"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_evidence_v07.py:106 (test_v2_offline_api_history_filters_and_calibration)",
+    "environment": "env-10"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_live_smoke.py:11 (client)",
+    "environment": "env-11"
+  },
+  {
+    "user": "other",
+    "tenant": "workspace",
+    "role": "operator",
+    "source": "backend/tests/test_live_smoke.py:11 (client)",
+    "environment": "env-11"
+  },
+  {
+    "user": "owner",
+    "tenant": "foreign",
+    "role": "admin",
+    "source": "backend/tests/test_live_smoke.py:11 (client)",
+    "environment": "env-11"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "viewer",
+    "source": "backend/tests/test_live_smoke.py:11 (client)",
+    "environment": "env-11"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_llm_reliability.py:73 (test_rbac_and_prompts)",
+    "environment": "env-12"
+  },
+  {
+    "user": "u",
+    "tenant": "other",
+    "role": "viewer",
+    "source": "backend/tests/test_llm_reliability.py:73 (test_rbac_and_prompts)",
+    "environment": "env-12"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_llm_reliability.py:174 (test_pricing_versions_and_regression_comparison)",
+    "environment": "env-13"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_rag.py:21 (settings)",
+    "environment": "env-14"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_tools_v03.py:16 (settings)",
+    "environment": "env-15"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_validation.py:15 (client)",
+    "environment": "env-16"
+  },
+  {
+    "user": "viewer",
+    "tenant": "foreign",
+    "role": "viewer",
+    "source": "backend/tests/test_validation.py:15 (client)",
+    "environment": "env-16"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_validation.py:93 (test_real_mechanism_only_with_local_injected_provider)",
+    "environment": "env-17"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "backend/tests/test_workflows.py:16 (settings)",
+    "environment": "env-18"
+  },
+  {
+    "user": "owner",
+    "tenant": "workspace",
+    "role": "admin",
+    "source": "Current running local workspace",
+    "environment": "env-19"
+  }
+]

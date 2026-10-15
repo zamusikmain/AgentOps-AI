@@ -1,0 +1,23 @@
+import {test,expect} from './authenticated-test';
+test('v0.7 calibration, partial answer, repair diagnostics and filtered reload',async({page})=>{
+ test.setTimeout(660000);
+ await page.goto('/');await page.getByRole('button',{name:'Оценка RAG',exact:true}).click();
+ await page.getByLabel('Версия набора данных').selectOption('v2');
+ const install=page.getByRole('button',{name:'Подготовить тестовый набор',exact:true});
+ const installing=page.waitForResponse(r=>r.url().includes('/api/evaluation/install?version=v2')&&r.request().method()==='POST');
+ await install.click();const installed=await installing;expect(installed.status()).toBe(201);const prepared=await installed.json();await expect(install).toBeEnabled({timeout:310000});
+ await expect(page.getByLabel('Агент с доступом к тестовым документам')).toHaveValue(prepared.agent_id);
+ const responsePromise=page.waitForResponse(r=>r.url().endsWith('/api/evaluation/runs')&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Запустить оценку',exact:true}).click();const response=await responsePromise;expect(response.status()).toBe(202);const run=await response.json();
+ await expect.poll(async()=>{const r=await page.request.get(`/api/evaluation/runs/${run.id}`);return (await r.json()).status;},{timeout:310000}).toBe('completed');
+ await page.getByLabel('Фильтр ошибок').selectOption('partial');
+ await page.locator('.execution-row').filter({hasText:'Provide the review period and deadline.'}).first().click();
+ const dialog=page.getByRole('dialog');await expect(dialog).toContainText('9 working days');await expect(dialog).toContainText('Частично');
+ await dialog.getByText('История исправлений',{exact:true}).click();await expect(dialog).toContainText('repaired_answer');
+ await dialog.getByText('Повторные поисковые проходы',{exact:true}).click();await expect(dialog).toContainText('deadline');
+ await dialog.getByRole('button',{name:'Закрыть',exact:true}).click();
+ await page.reload();await page.getByRole('button',{name:'Оценка RAG',exact:true}).click();await expect(page.locator('table')).toContainText('hybrid');
+ await page.getByText('Диагностика доказательств',{exact:true}).first().click();await expect(page.getByText('Доля ложных отказов',{exact:true}).first()).toBeVisible();
+ await page.getByRole('button',{name:'Переключить язык'}).click();await expect(page.getByText('False abstention rate',{exact:true}).first()).toBeVisible();
+ await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
+});
